@@ -5,6 +5,7 @@ from django.contrib.auth import views as auth_views
 from django.urls import include, path
 
 urlpatterns = [
+    path('api/', include('staff.api_urls')),
     path("admin/", admin.site.urls),
     path("", include("staff.urls")),
     path(
