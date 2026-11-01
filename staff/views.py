@@ -1,6 +1,5 @@
+from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import DetailView, ListView
-
 from .models import Employee
 
 
@@ -25,7 +24,8 @@ class EmployeeListView(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return Employee.objects.all().prefetch_related("images")
+        # Добавлен order_by("id") для корректной работы пагинации
+        return Employee.objects.all().order_by("id").prefetch_related("images")
 
 
 class EmployeeDetailView(LoginRequiredMixin, DetailView):
